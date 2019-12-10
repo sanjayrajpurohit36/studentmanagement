@@ -1,0 +1,123 @@
+.login-main-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, #0575e6, #021b79);
+}
+
+.login-nav {
+  background: #acb7d1;
+  height: 90px;
+  margin: 0px;
+  padding: 0px;
+  /* position: fixed; */
+  top: 0px;
+  /* z-index: 3333333; */
+  overflow: hidden;
+  width: 100%;
+  color: white;
+  font-size: 33px;
+  font-family: cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+.login-container-wrapper {
+  background: white;
+  height: 500px;
+  margin: auto;
+  box-shadow: #c2c2c2 0px 3px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+}
+
+.login-container-wrapper label {
+  width: 300px;
+  font-size: 18px;
+  font-family: cursive;
+  text-align: left;
+}
+
+#email,
+#password,
+#name {
+  width: 300px;
+  border: 1px solid #acb7d2;
+  background: white;
+  border-radius: 15px;
+  height: 55px;
+  padding-left: 15px;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.login-btn {
+  width: 300px;
+  background: #acb7d2;
+  height: 55px;
+  font-size: 22px;
+  color: white;
+  font-family: cursive;
+  cursor: pointer;
+}
+
+#email:focus,
+#password:focus,
+.login-btn:focus,
+#name:focus {
+  outline: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.login-option {
+  overflow: hidden;
+  text-align: center;
+  width: 300px;
+}
+
+.login-option:before,
+.login-option:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 30%;
+}
+
+.login-option:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.login-option:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.login-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  font-weight: bold;
+  color: red;
+}

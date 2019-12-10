@@ -1,0 +1,99 @@
+.dashboard-main-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.dashboard-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-container-wrapper {
+  background: #ebf8fe;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-nav {
+  background: #389ee6;
+  height: 60px;
+  margin: 0px;
+  padding: 0px;
+  position: fixed;
+  top: 0px;
+  z-index: 3333333;
+  overflow: hidden;
+  width: 100%;
+  color: white;
+}
+
+.dashboard-data {
+  background: #ffffff;
+  margin: auto;
+  max-height: calc(100%);
+  padding: 65px;
+  overflow: scroll;
+}
+
+.dashboard-margin {
+  margin-bottom: 60px;
+}
+
+.dashboard-card {
+  margin: auto;
+  width: 170px;
+  height: 210px;
+  background: white;
+  padding: 12px;
+  box-shadow: #c2c2c2 0px 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+  box-shadow: #c2c2c2 0px 20px 6px;
+  cursor: pointer;
+}
+
+.not-found {
+  height: 548px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-family: fantasy;
+  flex-direction: column;
+  background: white;
+  padding: 45px;
+}
+
+.dashboard-nav-wrapper {
+  display: flex;
+  /* width: 100%; */
+  justify-content: center;
+  align-items: center;
+}
+
+.student-search {
+  width: 100%;
+  border-radius: 4px;
+  padding: 4px;
+  border: none;
+}
+
+.student-search:focus {
+  outline: none;
+}
+
+.btn-sortByMarks {
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.btn {
+  text-align: right;
+}
