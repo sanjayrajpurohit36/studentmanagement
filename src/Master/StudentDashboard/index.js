@@ -1,9 +1,11 @@
 import React from "react";
 import { getAllStudentsData } from "../../Actions/studentAction";
 import { connect } from "react-redux";
-import "./index.css";
 import ImgUpward from "../../Images/up-arrow.png";
 import ImgDownward from "../../Images/download-arrow.png";
+import Loader from "../../Images/loader.svg";
+import noData from "../../Images/noData.png";
+import "./index.css";
 
 const mapStateToProps = store => {
   return {
@@ -16,11 +18,12 @@ class StudentDashboard extends React.Component {
     super(props);
 
     this.state = {
+      isLoader: true,
       studentData: {},
-      sortAlphabet: true,
-      sortMarks: true,
-      sortAlphabetIcon: true,
-      sortMarksIcon: true
+      isSortAlphabet: true,
+      isSortMarks: true,
+      isSortAlphabetIcon: true,
+      isSortMarksIcon: true
     };
   }
 
@@ -31,12 +34,13 @@ class StudentDashboard extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.studentData && nextProps.studentData.length !== 0) {
       this.setState({
-        studentData: nextProps.studentData.data
+        studentData: nextProps.studentData.data,
+        isLoader: false
       });
     }
   }
 
-  getTheStudentData(values) {
+  getStudentData(values) {
     var studentInfo = Object.assign({}, values);
     var rollNo = studentInfo[rollNo];
     this.props.history.push({
@@ -48,7 +52,7 @@ class StudentDashboard extends React.Component {
   }
 
   searchStudent = e => {
-    var input = e.target.value.toUpperCase();
+    var input = e.target.value.toLowerCase();
     this.setState(
       {
         studentData: this.props.studentData.data
@@ -57,7 +61,7 @@ class StudentDashboard extends React.Component {
         var res = Object.keys(this.state.studentData)
           .filter(
             keys =>
-              this.state.studentData[keys].name.toUpperCase().indexOf(input) >
+              this.state.studentData[keys].name.toLowerCase().indexOf(input) >
               -1
           )
           .reduce(
@@ -92,8 +96,8 @@ class StudentDashboard extends React.Component {
             if (a.name > b.name) return 1;
 
             this.setState({
-              sortAlphabet: !this.state.sortAlphabet,
-              sortAlphabetIcon: true
+              isSortAlphabet: !this.state.isSortAlphabet,
+              isSortAlphabetIcon: true
             });
 
             return 0;
@@ -103,8 +107,8 @@ class StudentDashboard extends React.Component {
             if (a.name < b.name) return 1;
 
             this.setState({
-              sortAlphabet: !this.state.sortAlphabet,
-              sortAlphabetIcon: false
+              isSortAlphabet: !this.state.isSortAlphabet,
+              isSortAlphabetIcon: false
             });
 
             return 0;
@@ -123,8 +127,8 @@ class StudentDashboard extends React.Component {
             if (marks1 > marks2) return 1;
 
             this.setState({
-              sortMarks: !this.state.sortMarks,
-              sortMarksIcon: true
+              isSortMarks: !this.state.isSortMarks,
+              isSortMarksIcon: true
             });
             return 0;
           } else {
@@ -142,8 +146,8 @@ class StudentDashboard extends React.Component {
             if (marks1 < marks2) return 1;
 
             this.setState({
-              sortMarks: !this.state.sortMarks,
-              sortMarksIcon: false
+              isSortMarks: !this.state.isSortMarks,
+              isSortMarksIcon: false
             });
 
             return 0;
@@ -161,106 +165,123 @@ class StudentDashboard extends React.Component {
     Object.keys(marks).map(value => {
       totalMarks += marks[value];
     });
+
     return totalMarks;
   };
 
   render() {
     return (
       <div className="dashboard-main-container">
-        <div className="dashboard-container-wrapper">
-          <div className="dashboard-nav row">
-            <div className="col-sm-12 col-md-12 col-lg-12 dashboard-nav-wrapper">
-              <div className="col-sm-8 col-md-5 col-lg-5">
-                <input
-                  placeholder="Search"
-                  onChange={this.searchStudent}
-                  className="student-search"
-                ></input>
-              </div>
-              <div className="col-md-4 col-lg-4 btn">
-                <button
-                  className="btn btn-primary"
-                  onClick={
-                    this.state.sortAlphabet
-                      ? this.sortData.bind(this, "sortByAlphabet")
-                      : this.sortData.bind(this, "sortByReverseAlphabet")
-                  }
-                  style={{ width: "98px" }}
-                >
-                  Name{" "}
-                  <span>
-                    <img
-                      src={
-                        this.state.sortAlphabetIcon ? ImgUpward : ImgDownward
-                      }
-                      className="alphabet-icon"
-                      width="30%"
-                      height="22px"
-                    />
-                  </span>
-                </button>
-                <button
-                  className="btn btn-success btn-sortByMarks"
-                  onClick={
-                    this.state.sortMarks
-                      ? this.sortData.bind(this, "sortByIncOrderOfMarks")
-                      : this.sortData.bind(this)
-                  }
-                  style={{
-                    width: "100px",
-                    textAlign: "center"
-                  }}
-                >
-                  Marks{" "}
-                  <span>
-                    <img
-                      src={this.state.sortMarksIcon ? ImgUpward : ImgDownward}
-                      className="alphabet-icon"
-                      width="30%"
-                      height="22px"
-                    />
-                  </span>
-                </button>
+        {this.state.isLoader ? (
+          <div className="loader">
+            <img src={Loader} alt="loader" />
+          </div>
+        ) : (
+          <div className="dashboard-container-wrapper">
+            <div className="dashboard-nav row">
+              <div className="col-sm-12 col-md-12 col-lg-12 dashboard-nav-wrapper">
+                <div className="col-sm-8 col-md-5 col-lg-5">
+                  <input
+                    placeholder="Search"
+                    onChange={this.searchStudent}
+                    className="student-search"
+                  ></input>
+                </div>
+                <div className="col-md-4 col-lg-4 btn">
+                  <button
+                    className="btn btn-primary"
+                    onClick={
+                      this.state.isSortAlphabet
+                        ? this.sortData.bind(this, "sortByAlphabet")
+                        : this.sortData.bind(this, "sortByReverseAlphabet")
+                    }
+                    style={{ width: "98px" }}
+                  >
+                    Name{" "}
+                    <span>
+                      <img
+                        src={
+                          this.state.isSortAlphabetIcon
+                            ? ImgUpward
+                            : ImgDownward
+                        }
+                        className="alphabet-icon"
+                        width="30%"
+                        height="22px"
+                      />
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-success btn-sortByMarks"
+                    onClick={
+                      this.state.isSortMarks
+                        ? this.sortData.bind(this, "sortByIncOrderOfMarks")
+                        : this.sortData.bind(this)
+                    }
+                    style={{
+                      width: "100px",
+                      textAlign: "center"
+                    }}
+                  >
+                    Marks{" "}
+                    <span>
+                      <img
+                        src={
+                          this.state.isSortMarksIcon ? ImgUpward : ImgDownward
+                        }
+                        className="alphabet-icon"
+                        width="30%"
+                        height="22px"
+                      />
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="dashboard-data col-sm-12 col-md-12 col-lg-12">
-            {Object.keys(this.state.studentData) &&
-            Object.keys(this.state.studentData).length !== 0 ? (
-              <div className="row" style={{ paddingTop: "60px" }}>
-                {Object.keys(this.state.studentData).map((value, key) => {
-                  return (
-                    <div
-                      className="col-sm-12 col-md-6 col-lg-4 dashboard-margin"
-                      key={key}
-                    >
+            <div className="dashboard-data col-sm-12 col-md-12 col-lg-12">
+              {Object.keys(this.state.studentData) &&
+              Object.keys(this.state.studentData).length !== 0 ? (
+                <div className="row" style={{ paddingTop: "60px" }}>
+                  {Object.keys(this.state.studentData).map((value, key) => {
+                    return (
                       <div
-                        className="dashboard-card"
-                        onClick={this.getTheStudentData.bind(
-                          this,
-                          this.state.studentData[value]
-                        )}
+                        className="col-sm-12 col-md-6 col-lg-4 dashboard-margin"
+                        key={key}
                       >
-                        <div>Id: {this.state.studentData[value].rollNo}</div>
-                        <div>Name: {this.state.studentData[value].name}</div>
-                        <div>
-                          Total Marks:{" "}
-                          {this.getTotalMarks(
-                            this.state.studentData[value].marks
+                        <div
+                          className="student-card"
+                          onClick={this.getStudentData.bind(
+                            this,
+                            this.state.studentData[value]
                           )}
+                        >
+                          <div>Id: {this.state.studentData[value].rollNo}</div>
+                          <div>Name: {this.state.studentData[value].name}</div>
+                          <div>
+                            Total Marks:{" "}
+                            {this.getTotalMarks(
+                              this.state.studentData[value].marks
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="not-found">
-                <div>No Data Available</div>
-              </div>
-            )}
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="noData">
+                  <div>
+                    <img
+                      src={noData}
+                      alt="loader"
+                      style={{ height: "400px", width: "400px" }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }

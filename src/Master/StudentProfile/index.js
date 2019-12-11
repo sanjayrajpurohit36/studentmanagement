@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getAllStudentsData } from "../../Actions/studentAction";
 import StudentIcon from "../../Images/user.png";
+import noData from "../../Images/noData.png";
 import "./index.css";
 
 const mapStateToProps = store => {
@@ -14,9 +15,8 @@ class StudentData extends React.Component {
     super(props);
 
     this.state = {
-      studentInfo: {},
-      studentData: {},
-      loader: true
+      studentDetails: {},
+      studentData: {}
     };
   }
 
@@ -36,13 +36,11 @@ class StudentData extends React.Component {
             var index = parseInt(loc[2]);
             if (this.state.studentData[index] !== undefined) {
               this.setState({
-                studentInfo: this.state.studentData[index],
-                loader: false
+                studentDetails: this.state.studentData[index]
               });
             } else {
               this.setState({
-                loader: false,
-                studentInfo: {}
+                studentDetails: {}
               });
             }
           }
@@ -85,8 +83,8 @@ class StudentData extends React.Component {
           <div className="row login-container">
             <div className="col-sm-8 col-md-6 col-lg-5 student-info-main-container">
               <div className="login-flex">
-                {Object.keys(this.state.studentInfo) &&
-                Object.keys(this.state.studentInfo).length !== 0 ? (
+                {Object.keys(this.state.studentDetails) &&
+                Object.keys(this.state.studentDetails).length !== 0 ? (
                   <div className="student-info-container col-sm-12 col-md-12 col-lg-12">
                     <div className="col-sm-12 col-md-12 col-lg-12">
                       <img
@@ -97,24 +95,34 @@ class StudentData extends React.Component {
                       />
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-12 student-info-name">
-                      Name: {this.state.studentInfo.name}{" "}
+                      Name: {this.state.studentDetails.name}{" "}
                       <div className="col-sm-12 col-md-12 col-lg-12">
                         <div className="student-info-details">
-                          Roll No: {this.state.studentInfo.rollNo}
+                          Roll No: {this.state.studentDetails.rollNo}
                         </div>
-                        {/* <div>Name: {this.state.studentInfo.name}</div> */}
                         <div className="student-info-details">
-                          Class: {this.state.studentInfo.class}
+                          Class: {this.state.studentDetails.class}
                         </div>
                         <div className="student-info-details">
                           Marks:{" "}
-                          {this.getTotalMarks(this.state.studentInfo.marks)}
+                          {this.getTotalMarks(this.state.studentDetails.marks)}
                         </div>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="no-student">No student found!!!</div>
+                  <div className="no-student-data">
+                    <div>
+                      <img
+                        src={noData}
+                        alt="No Data Found"
+                        style={{
+                          height: "300px",
+                          width: "300px"
+                        }}
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>

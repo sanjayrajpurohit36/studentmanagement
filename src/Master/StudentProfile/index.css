@@ -30,11 +30,9 @@
   text-align: initial;
 }
 
-.no-student {
+.no-student-data {
   width: 100%;
-  font-size: 35px;
   color: black;
-  margin-top: 230px;
   text-align: center;
 }
 
