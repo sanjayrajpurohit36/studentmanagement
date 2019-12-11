@@ -1,0 +1,62 @@
+.student-info-main-container {
+  background: white;
+  height: 465px;
+  margin: auto;
+  box-shadow: #c2c2c2 0px 3px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+}
+
+.student-info-main-container:hover {
+  box-shadow: #c2c2c2 0px 30px 16px;
+  cursor: pointer;
+}
+
+.student-info-container {
+  margin: auto;
+  text-align: center;
+}
+
+.student-info-name {
+  font-size: 35px;
+}
+
+.student-info-details {
+  font-size: 35px;
+  text-align: initial;
+}
+
+.no-student {
+  width: 100%;
+  font-size: 35px;
+  color: black;
+  margin-top: 230px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 991px) {
+  .student-info-name {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .student-info-details {
+    font-size: 20px;
+
+    text-align: initial;
+  }
+
+  .student-info-wrapper {
+    height: 100%;
+  }
+
+  .student-info-container {
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+  }
+}

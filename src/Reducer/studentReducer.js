@@ -5,7 +5,7 @@ export default function reducer(
   action
 ) {
   switch (action.type) {
-    case "STUDENT_DATA":
+    case "ALL_STUDENT_DATA":
       return { ...state, studentData: action.payload };
     default: {
     }

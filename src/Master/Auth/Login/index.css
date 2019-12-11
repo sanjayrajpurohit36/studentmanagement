@@ -1,7 +1,6 @@
 .login-main-container {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to right, #0575e6, #021b79);
 }
 
 .login-nav {
@@ -39,9 +38,14 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 3rem;
+}
+
+.login-title {
+  font-size: 35px;
+  color: #0062cc;
 }
 
 .login-container-wrapper label {
@@ -74,15 +78,15 @@
   cursor: pointer;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
 #email:focus,
 #password:focus,
 .login-btn:focus,
 #name:focus {
   outline: none;
-}
-
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 .login-option {

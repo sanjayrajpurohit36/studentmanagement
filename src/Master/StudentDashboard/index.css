@@ -46,12 +46,21 @@
   margin: auto;
   width: 170px;
   height: 210px;
-  background: white;
+  background: #f8f9fa;
   padding: 12px;
   box-shadow: #c2c2c2 0px 3px 6px;
   border-radius: 4px;
   cursor: pointer;
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  font-size: 18px;
+  background-image: url("../../Images/bg_badge.png");
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position: top right;
 }
 
 .dashboard-card:hover {
@@ -73,7 +82,6 @@
 
 .dashboard-nav-wrapper {
   display: flex;
-  /* width: 100%; */
   justify-content: center;
   align-items: center;
 }

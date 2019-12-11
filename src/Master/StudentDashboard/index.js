@@ -1,7 +1,9 @@
 import React from "react";
-import { getAllStudents } from "../../Actions/studentAction";
+import { getAllStudentsData } from "../../Actions/studentAction";
 import { connect } from "react-redux";
 import "./index.css";
+import ImgUpward from "../../Images/up-arrow.png";
+import ImgDownward from "../../Images/download-arrow.png";
 
 const mapStateToProps = store => {
   return {
@@ -16,12 +18,14 @@ class StudentDashboard extends React.Component {
     this.state = {
       studentData: {},
       sortAlphabet: true,
-      sortMarks: true
+      sortMarks: true,
+      sortAlphabetIcon: true,
+      sortMarksIcon: true
     };
   }
 
   componentDidMount() {
-    this.props.dispatch(getAllStudents);
+    this.props.dispatch(getAllStudentsData);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,7 +92,8 @@ class StudentDashboard extends React.Component {
             if (a.name > b.name) return 1;
 
             this.setState({
-              sortAlphabet: false
+              sortAlphabet: !this.state.sortAlphabet,
+              sortAlphabetIcon: true
             });
 
             return 0;
@@ -98,7 +103,8 @@ class StudentDashboard extends React.Component {
             if (a.name < b.name) return 1;
 
             this.setState({
-              sortAlphabet: true
+              sortAlphabet: !this.state.sortAlphabet,
+              sortAlphabetIcon: false
             });
 
             return 0;
@@ -117,7 +123,8 @@ class StudentDashboard extends React.Component {
             if (marks1 > marks2) return 1;
 
             this.setState({
-              sortMarks: false
+              sortMarks: !this.state.sortMarks,
+              sortMarksIcon: true
             });
             return 0;
           } else {
@@ -135,7 +142,8 @@ class StudentDashboard extends React.Component {
             if (marks1 < marks2) return 1;
 
             this.setState({
-              sortMarks: true
+              sortMarks: !this.state.sortMarks,
+              sortMarksIcon: false
             });
 
             return 0;
@@ -177,8 +185,19 @@ class StudentDashboard extends React.Component {
                       ? this.sortData.bind(this, "sortByAlphabet")
                       : this.sortData.bind(this, "sortByReverseAlphabet")
                   }
+                  style={{ width: "98px" }}
                 >
-                  {this.state.sort ? "Sort By A-Z" : "Sort ByZ-A"}
+                  Name{" "}
+                  <span>
+                    <img
+                      src={
+                        this.state.sortAlphabetIcon ? ImgUpward : ImgDownward
+                      }
+                      className="alphabet-icon"
+                      width="30%"
+                      height="22px"
+                    />
+                  </span>
                 </button>
                 <button
                   className="btn btn-success btn-sortByMarks"
@@ -187,13 +206,25 @@ class StudentDashboard extends React.Component {
                       ? this.sortData.bind(this, "sortByIncOrderOfMarks")
                       : this.sortData.bind(this)
                   }
+                  style={{
+                    width: "100px",
+                    textAlign: "center"
+                  }}
                 >
-                  {this.state.sort2 ? "Increasing Order" : "Decreasing Order"}
+                  Marks{" "}
+                  <span>
+                    <img
+                      src={this.state.sortMarksIcon ? ImgUpward : ImgDownward}
+                      className="alphabet-icon"
+                      width="30%"
+                      height="22px"
+                    />
+                  </span>
                 </button>
               </div>
             </div>
           </div>
-          <div className="dashboard-data col-sm-10 col-md-10 col-lg-10">
+          <div className="dashboard-data col-sm-12 col-md-12 col-lg-12">
             {Object.keys(this.state.studentData) &&
             Object.keys(this.state.studentData).length !== 0 ? (
               <div className="row" style={{ paddingTop: "60px" }}>
@@ -210,7 +241,6 @@ class StudentDashboard extends React.Component {
                           this.state.studentData[value]
                         )}
                       >
-                        <div style={{ width: "100px", margin: "auto" }}></div>
                         <div>Id: {this.state.studentData[value].rollNo}</div>
                         <div>Name: {this.state.studentData[value].name}</div>
                         <div>

@@ -80,6 +80,7 @@ class Login extends React.Component {
       <div className="login-main-container">
         <div className="row login-container">
           <div className="col-sm-8 col-md-6 col-lg-5 login-container-wrapper">
+            <div className="login-title">Student Management</div>
             <div className="login-flex">
               <label>Email</label>
               <input
