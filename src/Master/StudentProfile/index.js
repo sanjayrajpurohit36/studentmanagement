@@ -49,6 +49,7 @@ class StudentData extends React.Component {
     }
   }
 
+  //Function to calculate total marks
   getTotalMarks = marks => {
     var totalMarks = 0;
     Object.keys(marks).map(value => {

@@ -51,6 +51,7 @@ class StudentDashboard extends React.Component {
     });
   }
 
+  // Function to search data
   searchStudent = e => {
     var input = e.target.value.toLowerCase();
     this.setState(
@@ -82,6 +83,7 @@ class StudentDashboard extends React.Component {
     );
   };
 
+  // Function to sort data in (asc.-desc.) order
   sortData(type) {
     if (
       Object.keys(this.state.studentData) &&
@@ -160,6 +162,7 @@ class StudentDashboard extends React.Component {
     });
   }
 
+  //Function to calculate total marks
   getTotalMarks = marks => {
     var totalMarks = 0;
     Object.keys(marks).map(value => {
