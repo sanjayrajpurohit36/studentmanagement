@@ -1,15 +1,15 @@
 import React from "react";
 import { getAllStudentsData } from "../../Actions/studentAction";
 import { connect } from "react-redux";
-import ImgUpward from "../../Images/up-arrow.png";
-import ImgDownward from "../../Images/download-arrow.png";
-import Loader from "../../Images/loader.svg";
-import noData from "../../Images/noData.png";
+import ImgUpward from "assets/images/up-arrow.png";
+import ImgDownward from "assets/images/download-arrow.png";
+import Loader from "assets/images/loader.svg";
+import noData from "assets/images/noData.png";
 import "./index.css";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
-    studentData: store.student.studentData
+    studentData: store.student.studentData,
   };
 };
 
@@ -23,7 +23,7 @@ class StudentDashboard extends React.Component {
       isSortAlphabet: true,
       isSortMarks: true,
       isSortAlphabetIcon: true,
-      isSortMarksIcon: true
+      isSortMarksIcon: true,
     };
   }
 
@@ -35,7 +35,7 @@ class StudentDashboard extends React.Component {
     if (nextProps.studentData && nextProps.studentData.length !== 0) {
       this.setState({
         studentData: nextProps.studentData.data,
-        isLoader: false
+        isLoader: false,
       });
     }
   }
@@ -46,22 +46,22 @@ class StudentDashboard extends React.Component {
     this.props.history.push({
       pathname: `/dashboard/${studentInfo.rollNo}`,
       state: {
-        studentInfo: studentInfo
-      }
+        studentInfo: studentInfo,
+      },
     });
   }
 
   // Function to search data
-  searchStudent = e => {
+  searchStudent = (e) => {
     var input = e.target.value.toLowerCase();
     this.setState(
       {
-        studentData: this.props.studentData.data
+        studentData: this.props.studentData.data,
       },
       () => {
         var res = Object.keys(this.state.studentData)
           .filter(
-            keys =>
+            (keys) =>
               this.state.studentData[keys].name.toLowerCase().indexOf(input) >
               -1
           )
@@ -72,11 +72,11 @@ class StudentDashboard extends React.Component {
           );
 
         this.setState({
-          studentData: res
+          studentData: res,
         });
         if (input === "") {
           this.setState({
-            studentData: this.props.studentData.data
+            studentData: this.props.studentData.data,
           });
         }
       }
@@ -91,7 +91,7 @@ class StudentDashboard extends React.Component {
     ) {
       var list = Object.assign({}, this.state.studentData);
       var resultofSort = Object.values(list).sort(
-        function(a, b) {
+        function (a, b) {
           if (type === "sortByAlphabet") {
             if (a.name < b.name) return -1;
 
@@ -99,7 +99,7 @@ class StudentDashboard extends React.Component {
 
             this.setState({
               isSortAlphabet: !this.state.isSortAlphabet,
-              isSortAlphabetIcon: true
+              isSortAlphabetIcon: true,
             });
 
             return 0;
@@ -110,17 +110,17 @@ class StudentDashboard extends React.Component {
 
             this.setState({
               isSortAlphabet: !this.state.isSortAlphabet,
-              isSortAlphabetIcon: false
+              isSortAlphabetIcon: false,
             });
 
             return 0;
           } else if (type === "sortByIncOrderOfMarks") {
             let marks1 = 0;
             let marks2 = 0;
-            Object.keys(a.marks).map(value => {
+            Object.keys(a.marks).map((value) => {
               marks1 += a.marks[value];
             });
-            Object.keys(b.marks).map(value => {
+            Object.keys(b.marks).map((value) => {
               marks2 += b.marks[value];
             });
 
@@ -130,16 +130,16 @@ class StudentDashboard extends React.Component {
 
             this.setState({
               isSortMarks: !this.state.isSortMarks,
-              isSortMarksIcon: true
+              isSortMarksIcon: true,
             });
             return 0;
           } else {
             let marks1 = 0;
             let marks2 = 0;
-            Object.keys(a.marks).map(value => {
+            Object.keys(a.marks).map((value) => {
               marks1 += a.marks[value];
             });
-            Object.keys(b.marks).map(value => {
+            Object.keys(b.marks).map((value) => {
               marks2 += b.marks[value];
             });
 
@@ -149,7 +149,7 @@ class StudentDashboard extends React.Component {
 
             this.setState({
               isSortMarks: !this.state.isSortMarks,
-              isSortMarksIcon: false
+              isSortMarksIcon: false,
             });
 
             return 0;
@@ -158,14 +158,14 @@ class StudentDashboard extends React.Component {
       );
     }
     this.setState({
-      studentData: resultofSort
+      studentData: resultofSort,
     });
   }
 
   //Function to calculate total marks
-  getTotalMarks = marks => {
+  getTotalMarks = (marks) => {
     var totalMarks = 0;
-    Object.keys(marks).map(value => {
+    Object.keys(marks).map((value) => {
       totalMarks += marks[value];
     });
 
@@ -223,7 +223,7 @@ class StudentDashboard extends React.Component {
                     }
                     style={{
                       width: "100px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   >
                     Marks{" "}

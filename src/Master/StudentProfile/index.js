@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getAllStudentsData } from "../../Actions/studentAction";
-import StudentIcon from "../../Images/user.png";
-import noData from "../../Images/noData.png";
+import StudentIcon from "assets/images/user.png";
+import noData from "assets/images/noData.png";
 import "./index.css";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
-    studentData: store.student.studentData
+    studentData: store.student.studentData,
   };
 };
 class StudentData extends React.Component {
@@ -16,7 +16,7 @@ class StudentData extends React.Component {
 
     this.state = {
       studentDetails: {},
-      studentData: {}
+      studentData: {},
     };
   }
 
@@ -28,7 +28,7 @@ class StudentData extends React.Component {
     if (nextProps.studentData && nextProps.studentData.length !== 0) {
       this.setState(
         {
-          studentData: nextProps.studentData.data
+          studentData: nextProps.studentData.data,
         },
         () => {
           var loc = window.location.pathname.split("/");
@@ -36,11 +36,11 @@ class StudentData extends React.Component {
             var index = parseInt(loc[2]);
             if (this.state.studentData[index] !== undefined) {
               this.setState({
-                studentDetails: this.state.studentData[index]
+                studentDetails: this.state.studentData[index],
               });
             } else {
               this.setState({
-                studentDetails: {}
+                studentDetails: {},
               });
             }
           }
@@ -50,9 +50,9 @@ class StudentData extends React.Component {
   }
 
   //Function to calculate total marks
-  getTotalMarks = marks => {
+  getTotalMarks = (marks) => {
     var totalMarks = 0;
-    Object.keys(marks).map(value => {
+    Object.keys(marks).map((value) => {
       totalMarks += marks[value];
     });
     return totalMarks;
@@ -60,7 +60,7 @@ class StudentData extends React.Component {
 
   goToDashboard = () => {
     this.props.history.push({
-      pathname: `/dashboard`
+      pathname: `/dashboard`,
     });
   };
 
@@ -75,7 +75,7 @@ class StudentData extends React.Component {
               style={{
                 justifyContent: "start",
                 cursor: "pointer",
-                fontSize: "25px"
+                fontSize: "25px",
               }}
             >
               Back
@@ -119,7 +119,7 @@ class StudentData extends React.Component {
                         alt="No Data Found"
                         style={{
                           height: "300px",
-                          width: "300px"
+                          width: "300px",
                         }}
                       />
                     </div>
