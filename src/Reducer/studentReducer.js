@@ -1,12 +1,15 @@
 export default function reducer(
   state = {
-    studentData: {}
+    studentData: {},
+    isApiFetchError: {},
   },
   action
 ) {
   switch (action.type) {
     case "ALL_STUDENT_DATA":
       return { ...state, studentData: action.payload };
+    case "API_FETCH_ERROR":
+      return { ...state, isApiFetchError: action.payload };
     default: {
     }
   }

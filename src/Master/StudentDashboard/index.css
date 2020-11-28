@@ -9,6 +9,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  transition: all 0.3 ease-in-out;
+}
+
+.showLoader {
+  opacity: 1;
+}
+
+.hiddenLoader {
+  opacity: 0;
 }
 
 .dashboard-container-wrapper {
